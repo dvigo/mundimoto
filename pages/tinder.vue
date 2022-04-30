@@ -1,3 +1,4 @@
+ <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 <template>
   <section class="container">
     <div class="fixed header">
@@ -64,6 +65,7 @@
           <i class="material-icons">close</i>
       </div>
       <div class="btn btn--like" @click="match">
+      <i class="fas fa-file"></i>
           <i class="material-icons">favorite</i>
       </div>
     </div>
@@ -94,6 +96,17 @@ export default {
   },
   async created() {
     await this.$axios.$get('/variant?page=0&page_size=27').then( (res) => this.cards = res);
+    document.onkeydown = function (event) {
+      switch (event.keyCode) {
+         case 37:
+            document.querySelector(".btn--decline").click();
+            break;
+         case 39:
+            document.querySelector(".btn--like").click();
+            break;
+           break;
+      }
+   };
   },
   computed: {
     current() {
@@ -142,6 +155,8 @@ export default {
   }
 }
 </script>
+
+
 <style lang="scss" scoped>
 .header {
   width: 100%;
@@ -181,8 +196,8 @@ export default {
 }
 .btn {
   position: relative;
-  width: 50px;
-  height: 50px;
+  width: 80px;
+  height: 80px;
   padding: .2rem;
   border-radius: 50%;
   background-color: white;
@@ -298,6 +313,30 @@ export default {
   }
 }
 @import url('https://fonts.googleapis.com/css?family=Engagement');
-</style>
-<link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+@import url('https://fonts.googleapis.com/css?family=Material+Icons');
 
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 30px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+</style>
