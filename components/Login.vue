@@ -32,7 +32,9 @@ export default {
             username: this.username,
             password: this.password
           }
-        }).finally(this.$router.push('/dashboard'))
+        }).finally(
+          this.$router.push('/dashboard')
+        )
       } catch (e) {
         this.error = 'Usuario o contraseña incorrectos'
       }

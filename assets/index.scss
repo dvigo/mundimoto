@@ -1,5 +1,14 @@
 @import "variables.scss";
 @import "mixings.scss";
 
-@import "css/*";
+.left{
+  float: left;
+}
 
+.right {
+  float: right;
+}
+
+.non-float {
+  clear: both;
+}
