@@ -127,7 +127,7 @@ export default {
       if (event == 'match') {
           var self = this;
           this.$axios.$post('/variant/swinger', {liked: true, variant: variant_id}).then(function(data) {
-              cards.forEach(function(card) {
+              self.cards.forEach(function(card) {
                   self.cards.push(card);
               });
           });
