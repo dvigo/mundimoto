@@ -133,10 +133,10 @@ export default {
           });
           const { cancel } = emojisplosions({
             position: {x: window.innerWidth / 2, y:window.innerHeight / 2},
-            emojiCount: 50,
+            emojiCount: 20,
             emojis: ["🔥", "🏍", "🛵"]
           });
-          setTimeout(cancel, 500);
+          setTimeout(cancel, 100);
       } else if (event == 'reject') {
           var self = this;
           this.$axios.$post('/variant/swinger', {disliked: true, variant: variant_id}).then(function(data) {
@@ -196,8 +196,8 @@ export default {
 }
 .btn {
   position: relative;
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   padding: .2rem;
   border-radius: 50%;
   background-color: white;
