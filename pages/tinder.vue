@@ -20,8 +20,8 @@
         :interact-event-bus-events="interactEventBus"
         interact-block-drag-down
         interact-block-drag-up
-        @draggedRight="emitAndNext('match')"
-        @draggedLeft="emitAndNext('reject')"
+        @draggedRight="emitAndNext('match', next.id)"
+        @draggedLeft="emitAndNext('reject', next.id)"
         class="rounded-borders card card--one">
         <div style="height: 100%">
           <img
@@ -109,14 +109,27 @@ export default {
     reject() {
       InteractEventBus.$emit(EVENTS.REJECT)
     },
-    emitAndNext(event) {
+    emitAndNext(event, variant_id) {
       if (event == 'match') {
+          var self = this;
+          this.$axios.$post('/variant/swinger', {liked: true, variant: variant_id}).then(function(data) {
+              cards.forEach(function(card) {
+                  self.cards.push(card);
+              });
+          });
           const { cancel } = emojisplosions({
             position: {x: window.innerWidth / 2, y:window.innerHeight / 2},
             emojiCount: 50,
             emojis: ["🔥", "🏍", "🛵"]
           });
           setTimeout(cancel, 500);
+      } else if (event == 'reject') {
+          var self = this;
+          this.$axios.$post('/variant/swinger', {disliked: true, variant: variant_id}).then(function(data) {
+              cards.forEach(function(card) {
+                  self.cards.push(card);
+              });
+          });
       }
       this.$emit(event, this.index)
       setTimeout(() => this.isVisible = false, 200)
