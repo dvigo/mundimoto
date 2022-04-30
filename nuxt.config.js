@@ -47,25 +47,34 @@ export default {
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     // Workaround to avoid enforcing hard-coded localhost:3000: https://github.com/nuxt-community/axios-module/issues/308
-    baseURL: '/',
+    baseURL: 'http://10.4.178.191:5000/api',
   },
 
   auth: {
     strategies: {
       local: {
-        endpoints: {
-          login: {
-            url: '',
-            method: 'post',
-            propertyName: 'token',
-          },
-          logout: false,
-          user: { url: '', method: 'get', propertyName: false },
+        scheme: 'refresh',
+        token: {
+          property: 'access_token',
+          maxAge: 1800,
+          // type: 'Bearer'
         },
-        // tokenRequired: true,
-        // tokenType: 'bearer',
-        // globalToken: true,
-        // autoFetchUser: true
+        refreshToken: {
+          property: 'refresh_token',
+          data: 'refresh_token',
+          maxAge: 60 * 60 * 24 * 30
+        },
+        user: {
+          property: 'user',
+          // autoFetch: true
+        },
+        endpoints: {
+          login: { url: '/auth/login', method: 'post', propertyName: 'access_token'},
+          refresh: { url: '/auth/refresh', method: 'post' },
+          user: { url: '/user/me', method: 'get', propertyName: false },
+          logout: { url: '/logout', method: 'post' }
+        },
+        // autoLogout: false
       },
     },
   },
