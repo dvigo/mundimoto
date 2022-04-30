@@ -79,6 +79,7 @@ const EVENTS = {
 }
 export default {
   name: 'SwipeableCards',
+  middleware: ['auth'],
   components: { Vue2InteractDraggable },
   data() {
     return {
