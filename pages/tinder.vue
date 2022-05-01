@@ -32,7 +32,7 @@
             <h2>{{current.extra_data['category']}}</span></h2>
           </div>
           <div class="text">
-            <h2>{{current.name}}, <span>{{current.brand}}</span></h2>
+            <h2>{{current.name}}, <span>{{current.brand}} ({{current.model_year}})</span></h2>
           </div>
         </div>
       </Vue2InteractDraggable>
@@ -49,7 +49,7 @@
             <h2>{{next.extra_data['category']}}</span></h2>
           </div>
         <div class="text">
-            <h2>{{next.name}}, <span>{{next.brand}}</span></h2>
+            <h2>{{next.name}}, <span>{{next.brand}} ({{next.model_year}})</span></h2>
           </div>
       </div>
     </div>
