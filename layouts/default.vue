@@ -3,7 +3,8 @@
     v-app-bar(
       fixed
       app)
-      Logo
+      NuxtLink(to="/")
+        Logo
       v-spacer
       v-menu(offset-y)
         template(v-slot:activator="{ on, attrs }")

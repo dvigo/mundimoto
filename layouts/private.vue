@@ -21,7 +21,7 @@
             v-list-item-icon
               v-icon mdi-account-plus
             v-list-item-content Register
-          v-list-item(v-if="isAuthenticated" href="dashboard")
+          v-list-item(v-if="isAuthenticated")
             v-list-item-icon
               v-icon mdi-clipboard-outline
             v-list-item-content Dashboard

@@ -29,7 +29,12 @@
                 h4.left {{label}}
                 h3.right {{product['extra_data'][index]}}
       v-flex(xs12 sm12 md4 class="test")
-        Form
+        NuxtLink(to="/tinder")
+          v-card.more
+            v-img(src="/logooo.png" height="250px")
+        NuxtLink(to="/recommendation")
+          v-card
+            v-img(src="/form-L.png" height="400px")
 </template>
 
 <script>
@@ -126,3 +131,9 @@ export default {
   },
 }
 </script>
+
+<style scoped>
+.more {
+  margin-bottom: 50px;
+}
+</style>
