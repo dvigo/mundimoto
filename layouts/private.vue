@@ -28,7 +28,7 @@
           v-list-item(v-if="isAuthenticated" @click="logout")
             v-list-item-icon
               v-icon mdi-run-fast
-            v-list-item-content Salir
+            v-list-item-content Logout
     v-row.all
       v-col(cols="2")
         v-card(

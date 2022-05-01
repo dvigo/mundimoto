@@ -93,13 +93,10 @@ export default {
       }
       this.$axios.$get("/variant/recommendation"+params)
         .then((res) => {
-          //Perform action in always
-          console.log(res);
           this.products = res;
         })
         .catch((error) => {
-          console.log(error);
-          // error.response.status Check status code
+          
         });
     },
   },

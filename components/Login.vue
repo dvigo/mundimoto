@@ -5,13 +5,13 @@
       v-card(light style="min-height: 200px")
         v-card-text
           v-form(@submit='login')
-            v-text-field.input(placeholder="Tu nombre de usuario" type="email" required v-model="username")
+            v-text-field.input(placeholder="Your username" type="email" required v-model="username")
             v-spacer
-            v-text-field.input(placeholder="Tu contraseña" type="password" required v-model="password")
+            v-text-field.input(placeholder="Your password" type="password" required v-model="password")
             v-spacer
             p.iserror {{ this.error }}
-            v-btn(block type='submit') Acceder
-          v-btn( block href="register" style="margin-top: 20px") Registrate
+            v-btn(block type='submit') Log in
+          v-btn( block href="register" style="margin-top: 20px") Sign up
 </template>
 
 <script>
@@ -32,7 +32,7 @@ export default {
             username: this.username,
             password: this.password
           }
-        }).finally(
+        }).then(
           this.$nuxt.$options.router.push('/')
         )
       } catch (e) {

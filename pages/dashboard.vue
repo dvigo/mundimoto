@@ -64,7 +64,7 @@ export default {
         const data = {
           labels: labels,
           datasets: [{
-            label: 'My First Dataset',
+            label: 'Nº of likes per category',
             data: this.likeColumns,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
@@ -91,7 +91,7 @@ export default {
         const data_dislike = {
           labels: labels,
           datasets: [{
-            label: 'My First Dataset',
+            label: 'Nº of dislikes per category',
             data: this.dislikeCol,
             backgroundColor: [
               'rgba(255, 99, 132, 0.2)',
