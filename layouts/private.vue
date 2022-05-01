@@ -16,17 +16,17 @@
           v-list-item(v-if="!isAuthenticated" href="/login")
             v-list-item-icon
               v-icon mdi-account
-            v-list-item-content Acceder
+            v-list-item-content Log in
           v-list-item(v-if="!isAuthenticated" href="register")
             v-list-item-icon
               v-icon mdi-account-plus
-            v-list-item-content Register
+            v-list-item-content Sign up
           v-list-item(v-if="isAuthenticated")
             v-list-item-icon
               v-icon mdi-clipboard-outline
             v-list-item-content Dashboard
           v-list-item(v-if="isAuthenticated" @click="logout")
-            v-list-item-icon
+            v-list-item-icont
               v-icon mdi-run-fast
             v-list-item-content Logout
     v-row.all
