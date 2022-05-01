@@ -95,7 +95,9 @@ export default {
     }
   },
   async created() {
-    await this.$axios.$get('/variant?page=0&page_size=27').then( (res) => this.cards = res);
+    await this.$axios.$get('/variant/swinger').then( (res) => this.cards = res);
+  },
+  mounted:function() {
     document.onkeydown = function (event) {
       switch (event.keyCode) {
          case 37:
@@ -107,7 +109,7 @@ export default {
            break;
       }
    };
-  },
+      },
   computed: {
     current() {
       return this.cards[this.index]
