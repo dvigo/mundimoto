@@ -9,7 +9,6 @@
         template(v-slot:activator="{ on, attrs }")
           v-btn(v-bind="attrs" v-on="on")
             v-icon mdi-account
-            v-text(v-if="isAuthenticated") {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
         v-list
           v-list-item(v-if="!isAuthenticated" href="/login")
             v-list-item-icon
