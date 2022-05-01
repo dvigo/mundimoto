@@ -115,7 +115,7 @@ export default {
       return this.cards[this.index]
     },
     next() {
-      return this.cards[this.index + 1]
+        return this.cards[this.index + 1]
     }
   },
   methods: {
@@ -125,11 +125,11 @@ export default {
     reject() {
       InteractEventBus.$emit(EVENTS.REJECT)
     },
-    emitAndNext(event, variant_id) {
+    async emitAndNext(event, variant_id) {
       if (event == 'match') {
           var self = this;
-          this.$axios.$post('/variant/swinger', {liked: true, variant: variant_id}).then(function(data) {
-              self.cards.forEach(function(card) {
+          await this.$axios.$post('/variant/swinger', {liked: true, variant: variant_id}).then(function(data) {
+              data.forEach(function(card) {
                   self.cards.push(card);
               });
               self.cards = self.cards.filter((value, index, self) =>
@@ -146,10 +146,15 @@ export default {
           setTimeout(cancel, 100);
       } else if (event == 'reject') {
           var self = this;
-          this.$axios.$post('/variant/swinger', {disliked: true, variant: variant_id}).then(function(data) {
-              self.cards.forEach(function(card) {
+          await this.$axios.$post('/variant/swinger', {disliked: true, variant: variant_id}).then(function(data) {
+              data.forEach(function(card) {
                   self.cards.push(card);
               });
+              self.cards = self.cards.filter((value, index, self) =>
+                index === self.findIndex((t) => (
+                t.id === value.id
+                ))
+              )
           });
       }
       this.$emit(event, this.index)
