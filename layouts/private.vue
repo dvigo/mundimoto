@@ -90,6 +90,8 @@ export default {
 }
 
 .navbar {
+  position: fixed;
+  padding-top: 80px;
   background: #C1281E;
     background: -webkit-linear-gradient(to top, #1e1e1d, 30%, #C1281E);
   background: linear-gradient(to top, #1e1e1d, 30%, #C1281E);

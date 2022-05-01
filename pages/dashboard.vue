@@ -161,10 +161,5 @@ export default {
   padding-top: 30px;
 }
 
-canvas {
-    width: 45% !important;
-    height: 45% !important;
-    }
-
 </style>
 
