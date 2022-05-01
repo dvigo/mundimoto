@@ -147,7 +147,7 @@ export default {
       } else if (event == 'reject') {
           var self = this;
           this.$axios.$post('/variant/swinger', {disliked: true, variant: variant_id}).then(function(data) {
-              cards.forEach(function(card) {
+              self.cards.forEach(function(card) {
                   self.cards.push(card);
               });
           });
