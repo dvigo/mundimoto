@@ -33,7 +33,7 @@ export default {
             password: this.password
           }
         }).finally(
-          this.$router.push('/dashboard')
+          this.$nuxt.$options.router.push('/')
         )
       } catch (e) {
         this.error = 'Usuario o contraseña incorrectos'

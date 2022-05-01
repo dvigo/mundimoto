@@ -77,12 +77,6 @@ export default {
         // autoLogout: false
       },
     },
-    redirect: {
-      login: '/login',
-      logout: '/',
-      callback: '/login',
-      home: '/dashboard'
-    }
   },
 
   // Vuetify module configuration: https://go.nuxtjs.dev/config-vuetify
