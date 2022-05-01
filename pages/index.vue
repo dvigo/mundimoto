@@ -1,7 +1,17 @@
 <template lang="pug">
-  v-container(fluid grid-list-md)
-    v-layout(row wrap)
-      Product(v-for="product in products" :product="product" :key="product.id")
+  div
+    v-row
+      v-col(cols="6")
+        NuxtLink(to="/tinder")
+          v-card
+            v-img(src="/logooo.png" height="180px")
+      v-col(cols="6")
+        NuxtLink(to="/recommendation")
+          v-card
+            v-img(src="/form.png" height="180px")
+    v-container(fluid grid-list-md)
+      v-layout(row wrap)
+        Product(v-for="product in products" :product="product" :key="product.id")
 </template>
 
 <script>
