@@ -3,7 +3,6 @@
     v-layout(row wrap)
       v-flex(xs12 sm12 md8 class="test")
         div
-          h1(primary class="title") {{product.name}} ({{product.model_year}})
           v-img(:src="product.image")
         hr
         div

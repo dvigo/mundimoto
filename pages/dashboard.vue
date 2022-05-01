@@ -21,6 +21,7 @@
 <script>
 export default {
   name: 'InspirePage',
+  layout: 'private',
   middleware: ['auth'],
 }
 </script>

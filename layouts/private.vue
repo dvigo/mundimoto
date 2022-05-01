@@ -1,17 +1,60 @@
-<template>
-  <v-app>
-    <v-app-bar
+<template lang="pug">
+  v-app
+    v-app-bar(
       :clipped-left="clipped"
       fixed
       app
-    >
-    </v-app-bar>
-    <v-main>
-      <v-container>
-        <Nuxt />
-      </v-container>
-    </v-main>
-  </v-app>
+    )
+      NuxtLink(to="/")
+        Logo
+      v-spacer
+      v-menu(offset-y)
+        template(v-slot:activator="{ on, attrs }")
+          v-btn(v-bind="attrs" v-on="on")
+            v-icon mdi-account
+            v-text(v-if="isAuthenticated") {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
+        v-list
+          v-list-item(v-if="!isAuthenticated" href="/login")
+            v-list-item-icon
+              v-icon mdi-account
+            v-list-item-content Acceder
+          v-list-item(v-if="!isAuthenticated" href="register")
+            v-list-item-icon
+              v-icon mdi-account-plus
+            v-list-item-content Register
+          v-list-item(v-if="isAuthenticated" href="dashboard")
+            v-list-item-icon
+              v-icon mdi-clipboard-outline
+            v-list-item-content Dashboard
+          v-list-item(v-if="isAuthenticated" @click="logout")
+            v-list-item-icon
+              v-icon mdi-run-fast
+            v-list-item-content Salir
+    v-row.all
+      v-col(cols="2")
+        v-card(
+          class=""
+          height="95vh"
+          width="256"
+        )
+          v-navigation-drawer(
+            class="navbar"
+            dark
+            permanent
+            )
+            v-list
+              v-list-item(
+                v-for="item in items"
+                :key="item.title"
+                link
+              )
+                v-list-item-icon
+                  v-icon {{ item.icon }}
+                v-list-item-content
+                  v-list-item-title {{ item.title }}
+      v-col(cols="10")
+        v-container
+          Nuxt
 </template>
 
 <script>
@@ -20,19 +63,26 @@ export default {
   data () {
     return {
       items: [
-        {
-          icon: 'mdi-apps',
-          title: 'Welcome',
-          to: '/'
-        },
-        {
-          icon: 'mdi-chart-bubble',
-          title: 'Inspire',
-          to: '/inspire'
-        }
-      ],
+          { title: 'Dashboard', icon: 'mdi-view-dashboard' },
+        ],
       title: 'MundiMoto'
     }
   }
 }
 </script>
+
+<style scoped>
+.all {
+  padding-top: 75px;
+}
+.all > .col {
+  padding-top: 0px;
+  padding-bottom: 0px;
+}
+
+.navbar {
+  background: #C1281E;
+    background: -webkit-linear-gradient(to top, #1e1e1d, 30%, #C1281E);
+  background: linear-gradient(to top, #1e1e1d, 30%, #C1281E);
+}
+</style>
