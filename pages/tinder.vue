@@ -29,7 +29,7 @@
             :src="current.image"
             class="rounded-borders"/>
         <div class="upper-text">
-            <h2>{{next.extra_data['category']}}</span></h2>
+            <h2>{{current.extra_data['category']}}</span></h2>
           </div>
           <div class="text">
             <h2>{{current.name}}, <span>{{current.brand}}</span></h2>
