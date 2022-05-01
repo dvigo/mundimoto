@@ -1,7 +1,6 @@
 <template lang="pug">
   v-app
     v-app-bar(
-      :clipped-left="clipped"
       fixed
       app
     )
@@ -12,7 +11,7 @@
         template(v-slot:activator="{ on, attrs }")
           v-btn(v-bind="attrs" v-on="on")
             v-icon mdi-account
-            v-text(v-if="isAuthenticated") {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
+            h5(v-if="isAuthenticated") {{ loggedInUser.first_name }} {{ loggedInUser.last_name }}
         v-list
           v-list-item(v-if="!isAuthenticated" href="/login")
             v-list-item-icon
@@ -58,6 +57,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: 'private',
   data () {
@@ -67,6 +68,14 @@ export default {
         ],
       title: 'MundiMoto'
     }
+  },
+  computed: {
+    ...mapGetters(['isAuthenticated', 'loggedInUser'])
+  },
+  methods: {
+    logout () {
+      this.$auth.logout()
+    },
   }
 }
 </script>
