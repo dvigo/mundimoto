@@ -19,7 +19,8 @@
           p {{dash.most_disliked.name}} ({{dash.most_disliked.model_year}})
           p {{dash.most_disliked.dislikes}}
     v-row
-      div(id="chart")
+      canvas(id="likeChart", class="chart")
+      canvas(id="dislikeChart", class="chart")
 </template>
 
 <script>
@@ -30,30 +31,28 @@ export default {
    head: {
     title: 'My awesome project', // Other meta information
     script: [
-      { hid: 'c3', src: 'https://cdnjs.cloudflare.com/ajax/libs/c3/0.7.20/c3.min.js', defer: true }
+      { hid: 'chartjs', src: 'https://cdn.jsdelivr.net/npm/chart.js', defer: true }
     ]
    },
   data() {
     return {
       dash: [],
       likeColumns: [],
-      dislikeCol: []
+      dislikeCol: [],
+     categories: [],
     }
   },
   async fetch() {
     await this.$axios.$get('/variant/dash').then( (res) => {
       this.dash = res;
-      console.log(res);
-      let likeColumns = [];
       for(let cat in this.dash.like_categories) {
-        likeColumns.push([cat, this.dash.like_categories[cat]])
+        this.likeColumns.push(this.dash.like_categories[cat])
+        this.categories.push(cat)
       }
-      this.likeColumns = likeColumns;
-      let dislikeCol = [];
+      this.dislikeCol = [];
       for(let cat in this.dash.like_categories) {
-        dislikeCol.push([cat, this.dash.dislike_categories[cat]])
+        this.dislikeCol.push(this.dash.dislike_categories[cat])
       }
-      this.dislikeCol = dislikeCol;
     });
   },
   mounted() {
@@ -61,23 +60,81 @@ export default {
   },
   methods: {
     generateChart(columns, id) {
-      c3.generate({
-        bindto: '#chart',
-        data: {
-            columns: [
-                 ['data1', 30, 200, 100, 400, 150, 250],
-            ['data2', 130, 100, 140, 200, 150, 50]
+        const labels = this.categories;
+        const data = {
+          labels: labels,
+          datasets: [{
+            label: 'My First Dataset',
+            data: this.likeColumns,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 205, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(201, 203, 207, 0.2)'
             ],
-            type: 'bar'
-        },
-        bar: {
-            width: {
-                ratio: 0.5 // this makes bar width 50% of length between ticks
-            }
-            // or
-            //width: 100 // this makes bar width 100px
-        }
-    });
+            borderColor: [
+              'rgb(255, 99, 132)',
+              'rgb(255, 159, 64)',
+              'rgb(255, 205, 86)',
+              'rgb(75, 192, 192)',
+              'rgb(54, 162, 235)',
+              'rgb(153, 102, 255)',
+              'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+          }]
+        };
+
+        const data_dislike = {
+          labels: labels,
+          datasets: [{
+            label: 'My First Dataset',
+            data: this.dislikeCol,
+            backgroundColor: [
+              'rgba(255, 99, 132, 0.2)',
+              'rgba(255, 159, 64, 0.2)',
+              'rgba(255, 205, 86, 0.2)',
+              'rgba(75, 192, 192, 0.2)',
+              'rgba(54, 162, 235, 0.2)',
+              'rgba(153, 102, 255, 0.2)',
+              'rgba(201, 203, 207, 0.2)'
+            ],
+            borderColor: [
+              'rgb(255, 99, 132)',
+              'rgb(255, 159, 64)',
+              'rgb(255, 205, 86)',
+              'rgb(75, 192, 192)',
+              'rgb(54, 162, 235)',
+              'rgb(153, 102, 255)',
+              'rgb(201, 203, 207)'
+            ],
+            borderWidth: 1
+          }]
+        };
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            },
+        };
+        const myChart = new Chart(
+            document.getElementById('likeChart'),
+            config
+        );
+        config['data'] = data_dislike
+        const myChart2 = new Chart(
+            document.getElementById('dislikeChart'),
+            config
+        );
+
     }
   }
 }
@@ -103,6 +160,11 @@ export default {
 .tag.moto {
   padding-top: 30px;
 }
+
+canvas {
+    width: 45% !important;
+    height: 45% !important;
+    }
 
 </style>
 
