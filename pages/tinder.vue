@@ -130,6 +130,11 @@ export default {
               self.cards.forEach(function(card) {
                   self.cards.push(card);
               });
+              self.cards = self.cards.filter((value, index, self) =>
+                index === self.findIndex((t) => (
+                t.id === value.id
+                ))
+              )
           });
           const { cancel } = emojisplosions({
             position: {x: window.innerWidth / 2, y:window.innerHeight / 2},
